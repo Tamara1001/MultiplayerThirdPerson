@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e391dc00640197458a5ba0d2ba8c59b, type: 3}
+  m_Name: SoundDef_Explode_Grenade
+  m_EditorClassIdentifier:
+  editorVolume: 1
+  unityAudioMixer: {fileID: 24100000, guid: fddb343a82968524eb1e9a6f65433d7e, type: 2}
+  mixerGroup: 1
+  basePitchInCents: 0
+  volumeScale: 1
+  baseLowPassCutoff: 0
+  playbackType: 1
+  playCount: 1
+  clips:
+  - {fileID: 8300000, guid: e91919c4e9d89f44fb9c519738e2a666, type: 3}
+  - {fileID: 8300000, guid: bad46d857a610a2448ec2f0242097d5f, type: 3}
+  - {fileID: 8300000, guid: 8b969f35a6f6b794a94cbd58d9a4c5a1, type: 3}
+  repeatInfo:
+    loopCount: 1
+    repeatMin: 1
+    repeatMax: 1
+  startStopInfo:
+    delayMin: 0
+    delayMax: 0
+    startOffsetPercentMin: 13
+    startOffsetPercentMax: 13
+    stopDelay: 0
+  pitchAndVolumeInfo:
+    volumeMin: -5.3
+    volumeMax: 0
+    pitchMin: -64
+    pitchMax: 0
+  distanceInfo:
+    volumeDistMin: 1.5
+    volumeDistMax: 45.7
+    spatialBlend: 0.74
+    volumeRolloffMode: 1
+    lpfRollOffCurveType: 4
+    lpfMinCutoff: 6833
+    lpfMaxDistance: 47.2
+    hpfRollOffCurveType: 0
+    hpfMinCutoff: 0
+    hpfMaxDistance: 0
+    spatialBlendCurveType: 4
+    spatialBlendMaxDistance: 27.4
+    panMin: 0
+    panMax: 0
+  lowPassFilter:
+    enableComponent: 1
+    cutoffMin: 9152
+    cutoffMax: 22000
+  highPassFilter:
+    enableComponent: 0
+    cutoffMin: 0
+    cutoffMax: 0
+  distortionFilter:
+    enableComponent: 0
+    distortionMin: 0
+    distortionMax: 0

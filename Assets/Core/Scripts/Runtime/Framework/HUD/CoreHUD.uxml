@@ -1,0 +1,15 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Core/Scripts/Runtime/Framework/HUD/CoreHUD.uss?fileID=7433441132597879392&amp;guid=e44b6512441c14caeb7f0f5c564b261c&amp;type=3#CoreHUD"/>
+    <ui:VisualElement name="hud-root">
+        <ui:VisualElement name="health-info-container">
+            <ui:ProgressBar value="63.8" title="my-progress" name="player-health-bar" class="blocks-progress-bar"/>
+            <ui:ProgressBar name="player-stamina-bar" low-value="0" high-value="100" value="100" class="blocks-progress-bar"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="notification-container" class="notification-container"/>
+        <ui:VisualElement name="message-overlay" style="display: none;">
+            <ui:Label name="message-label" text="RESPAWN IN"/>
+            <ui:VisualElement name="message-divider"/>
+            <ui:Label name="countdown-label" text="5"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

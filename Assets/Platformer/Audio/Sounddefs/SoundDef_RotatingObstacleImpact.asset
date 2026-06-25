@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e391dc00640197458a5ba0d2ba8c59b, type: 3}
+  m_Name: SoundDef_RotatingObstacleImpact
+  m_EditorClassIdentifier: 
+  mixerGroup: 1
+  basePitchInCents: 0
+  volumeScale: 0.8
+  baseLowPassCutoff: 2000
+  playbackType: 0
+  playCount: 1
+  clips:
+  - {fileID: 8300000, guid: 84d70c692c780424aafa9f5fd65e1fba, type: 3}
+  repeatInfo:
+    loopCount: 1
+    repeatMin: 1
+    repeatMax: 1
+  startStopInfo:
+    delayMin: 0
+    delayMax: 0
+    startOffsetPercentMin: 0
+    startOffsetPercentMax: 0
+    stopDelay: 0
+  pitchAndVolumeInfo:
+    volumeMin: 0
+    volumeMax: 0
+    pitchMin: 0
+    pitchMax: 200
+  distanceInfo:
+    volumeDistMin: 1.5
+    volumeDistMax: 22
+    spatialBlend: 1
+    dopplerScale: 0
+    volumeRolloffMode: 1
+    lpfRollOffCurveType: 0
+    lpfMinCutoff: 0
+    lpfMaxDistance: 0
+    hpfRollOffCurveType: 0
+    hpfMinCutoff: 0
+    hpfMaxDistance: 0
+    spatialBlendCurveType: 0
+    spatialBlendMaxDistance: 0
+    panMin: 0
+    panMax: 0
+  lowPassFilter:
+    enableComponent: 0
+    cutoffMin: 13924
+    cutoffMax: 16123
+  highPassFilter:
+    enableComponent: 0
+    cutoffMin: 1362
+    cutoffMax: 2200
+  distortionFilter:
+    enableComponent: 1
+    distortionMin: 0.35
+    distortionMax: 0.571
+  editorVolume: 1
+  unityAudioMixer: {fileID: 24100000, guid: fddb343a82968524eb1e9a6f65433d7e, type: 2}

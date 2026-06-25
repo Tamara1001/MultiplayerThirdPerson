@@ -1,0 +1,11 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="network-main-container" class="blocks-menu">
+        <ui:VisualElement name="connection-panel" class="blocks-modal">
+            <ui:Label text="Network Connection" class="blocks-header blocks-header--space-bottom"/>
+            <ui:VisualElement name="button-container" class="blocks-container--horizontal">
+                <ui:Button name="host-button" text="Start Host" class="blocks-button blocks-element--space-right"/>
+                <ui:Button name="client-button" text="Start Client" class="blocks-button"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

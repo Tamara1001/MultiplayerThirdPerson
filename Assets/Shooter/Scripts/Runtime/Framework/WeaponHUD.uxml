@@ -1,0 +1,24 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Shooter/Scripts/Runtime/Framework/WeaponHUD.uss?fileID=7433441132597879392&amp;guid=bbc435f537f5943b29f02366a419c599&amp;type=3#WeaponHUD"/>
+    <ui:VisualElement name="weapon-info-container">
+        <ui:Label name="weapon-type-label" text="Weapon Name"/>
+        <ui:Image name="weapon-icon"/>
+        <ui:VisualElement name="ammo-container">
+            <ui:Label name="ammo-label" text="0 / 0"/>
+            <ui:ProgressBar value="22" title="my-progress" name="player-ammo-bar" class="blocks-progress-bar blocks-ammo-bar"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="health-info-container">
+        <ui:ProgressBar value="63.8" title="my-progress" name="player-health-bar" class="blocks-progress-bar"/>
+        <ui:ProgressBar name="player-stamina-bar" low-value="0" high-value="100" value="100" class="blocks-progress-bar"/>
+    </ui:VisualElement>
+    <ui:VisualElement name="notification-container" class="notification-container"/>
+    <ui:VisualElement name="reticle-container">
+        <ui:VisualElement name="player-reticle"/>
+    </ui:VisualElement>
+    <ui:VisualElement name="message-overlay">
+        <ui:Label name="message-label" text="RESPAWN IN"/>
+        <ui:VisualElement name="message-divider"/>
+        <ui:Label name="countdown-label" text="05"/>
+    </ui:VisualElement>
+</ui:UXML>

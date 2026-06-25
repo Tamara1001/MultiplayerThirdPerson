@@ -1,0 +1,23 @@
+.blocks-icon-triangle{
+    background-image: url("../textures/icon_triangle.png");
+}
+
+.blocks-icon-x{
+    background-image: url("../textures/icon_x.png");
+}
+
+.blocks-icon-arrow{
+    background-image: url("../textures/icon_triangle.png");
+}
+
+.blocks-icon-pistol{
+    background-image: url("../textures/icon_pistol.png");
+}
+
+.blocks-icon-machinegun{
+    background-image: url("../textures/icon_machinegun.png");
+}
+
+.blocks-icon-rocketlauncher{
+    background-image: url("../textures/icon_rocketlauncher.png");
+}

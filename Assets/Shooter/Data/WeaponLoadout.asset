@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 328bda6b7d2a34e6c8d0b57ea6fbb7ac, type: 3}
+  m_Name: WeaponLoadout
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponLoadout
+  weaponPrefabs:
+  - {fileID: 8088137118841385260, guid: 82c99bd2812ce4f0b94e9529cd0ffcd9, type: 3}
+  - {fileID: 8088137118841385260, guid: 0cb34d6f0260b4f3483b1a769306e143, type: 3}
+  - {fileID: 8088137118841385260, guid: 7e8d6ff5c031e43ca9b99f184d50cb00, type: 3}
+  - {fileID: 8088137118841385260, guid: 2f90610f40a074d3c876064a9b376b30, type: 3}
+  defaultWeaponIndex: 0

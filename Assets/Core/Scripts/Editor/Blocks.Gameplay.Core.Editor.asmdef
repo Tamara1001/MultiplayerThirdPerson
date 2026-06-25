@@ -1,0 +1,28 @@
+{
+    "name": "Blocks.Gameplay.Core.Editor",
+    "rootNamespace": "Blocks.Gameplay.Core.Editor",
+    "references": [
+        "GUID:9f4f5bf029cebb64f983b7bdc29f62a1",
+        "GUID:1491147abca9d7d4bb7105af628b223e",
+        "GUID:ef87a43ecdba048edb51f3a3e5f7c971"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "UNITY_NETCODE_GAMEOBJECTS"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.unity.netcode.gameobjects",
+            "expression": "2.0.0",
+            "define": "UNITY_NETCODE_GAMEOBJECTS"
+        }
+    ],
+    "noEngineReferences": false
+}

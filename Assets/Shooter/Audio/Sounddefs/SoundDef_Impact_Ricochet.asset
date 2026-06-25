@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e391dc00640197458a5ba0d2ba8c59b, type: 3}
+  m_Name: SoundDef_Impact_Ricochet
+  m_EditorClassIdentifier:
+  editorVolume: 1
+  unityAudioMixer: {fileID: 24100000, guid: fddb343a82968524eb1e9a6f65433d7e, type: 2}
+  mixerGroup: 1
+  basePitchInCents: 0
+  volumeScale: 1
+  baseLowPassCutoff: 0
+  playbackType: 0
+  playCount: 1
+  clips:
+  - {fileID: 8300000, guid: fae415c7754fc1a44904a439e38cdfaa, type: 3}
+  - {fileID: 8300000, guid: fae415c7754fc1a44904a439e38cdfaa, type: 3}
+  - {fileID: 8300000, guid: c4ad7a8965250da40b2b72025cb6dca8, type: 3}
+  - {fileID: 8300000, guid: 95a8d8a27347ea94581169e6f8ec44de, type: 3}
+  - {fileID: 8300000, guid: 8fc0a6d6ceaa48c4a862ba36f574e317, type: 3}
+  - {fileID: 8300000, guid: 45adf8c87a916ee4485ff357c8086903, type: 3}
+  - {fileID: 8300000, guid: 1c3119cab07fe0b4da7621b5e7b590d5, type: 3}
+  repeatInfo:
+    loopCount: 1
+    repeatMin: 1
+    repeatMax: 1
+  startStopInfo:
+    delayMin: 0
+    delayMax: 0
+    startOffsetPercentMin: 0
+    startOffsetPercentMax: 15
+    stopDelay: 0
+  pitchAndVolumeInfo:
+    volumeMin: -1.2
+    volumeMax: 0
+    pitchMin: 0
+    pitchMax: 1201
+  distanceInfo:
+    volumeDistMin: 1.5
+    volumeDistMax: 30
+    spatialBlend: 1
+    dopplerScale: 0
+    volumeRolloffMode: 1
+    lpfRollOffCurveType: 0
+    lpfMinCutoff: 0
+    lpfMaxDistance: 0
+    hpfRollOffCurveType: 0
+    hpfMinCutoff: 0
+    hpfMaxDistance: 0
+    spatialBlendCurveType: 0
+    spatialBlendMaxDistance: 0
+    panMin: 0
+    panMax: 0
+  lowPassFilter:
+    enableComponent: 0
+    cutoffMin: 16514
+    cutoffMax: 22000
+  highPassFilter:
+    enableComponent: 0
+    cutoffMin: 0
+    cutoffMax: 0
+  distortionFilter:
+    enableComponent: 0
+    distortionMin: 0
+    distortionMax: 0

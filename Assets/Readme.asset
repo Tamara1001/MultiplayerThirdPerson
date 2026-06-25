@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf7219bab7fe46a1ad266029b2fee19, type: 3}
+  m_Name: Readme
+  m_EditorClassIdentifier: 
+  icon: {fileID: 2800000, guid: 45d6df54b44644a7897a8f7b09641c73, type: 3}
+  title: Multiplayer Third Person Gameplay
+  sections:
+  - heading: Welcome to the Multiplayer Third Person Gameplay Template
+    text: A modular template built around Netcode for GameObjects that is developed as a foundation for prototyping and building multiplayer games. It uses Unity Building Blocks to enable functionality and is designed to be extendable with a core foundation and add-on references for platforming and shooting.
+    linkText: 
+    url:
+  - heading: "Start Exploring"
+    text:
+    linkText: 
+    url: 
+    assetGuid:
+  - heading:
+    text:
+    linkText: "Core Readme"
+    url: 
+    assetGuid: 2e6fcc61b142f41b8b79cb52070e46d8
+  - heading:
+    text:
+    linkText: "Platformer Readme"
+    url: 
+    assetGuid: 21b6008b8df96439d9c1e91abdd08827
+  - heading:
+    text:
+    linkText: "Shooter Readme"
+    url: 
+    assetGuid: dd00d411680d1478a930fd2c1b164672
+  - heading: "Documentation & Tutorials"
+    text: Learn how to use and create your own
+    linkText: View Tutorials
+    url: https://docs.unity3d.com/Packages/com.unity.template.multiplayer-third-person-gameplay@1.0/manual/index.html
+    assetGuid:
+  - heading: Netcode for GameObjects Documentation
+    text:
+    linkText: Read more about NGO
+    url: https://docs-multiplayer.unity3d.com/netcode/current/about/
+  - heading: Forums
+    text:
+    linkText: Get answers and support
+    url: https://discussions.unity.com/lists/multiplayer
+  - heading: Report bugs
+    text:
+    linkText: Submit a report
+    url: https://unity3d.com/unity/qa/bug-reporting
+  loadedLayout: 1

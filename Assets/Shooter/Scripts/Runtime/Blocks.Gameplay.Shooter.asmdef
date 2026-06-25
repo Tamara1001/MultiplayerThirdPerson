@@ -1,0 +1,54 @@
+{
+    "name": "Blocks.Gameplay.Shooter",
+    "rootNamespace": "Blocks.Gameplay.Shooter",
+    "references": [
+        "GUID:ef87a43ecdba048edb51f3a3e5f7c971",
+        "GUID:1491147abca9d7d4bb7105af628b223e",
+        "GUID:7f7d1af65c2641843945d409d28f2e20",
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:e0cd26848372d4e5c891c569017e11f1",
+        "GUID:4307f53044263cf4b835bd812fc161a4"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "UNITY_NETCODE_GAMEOBJECTS",
+        "UNITY_INPUT_SYSTEM",
+        "UNITY_ANIMATION_RIGGING",
+        "UNITY_UGUI",
+        "UNITY_CINEMACHINE"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.unity.netcode.gameobjects",
+            "expression": "2.0.0",
+            "define": "UNITY_NETCODE_GAMEOBJECTS"
+        },
+        {
+            "name": "com.unity.inputsystem",
+            "expression": "1.0.0",
+            "define": "UNITY_INPUT_SYSTEM"
+        },
+        {
+            "name": "com.unity.animation.rigging",
+            "expression": "1.0.0",
+            "define": "UNITY_ANIMATION_RIGGING"
+        },
+        {
+            "name": "com.unity.ugui",
+            "expression": "2.0.0",
+            "define": "UNITY_UGUI"
+        },
+        {
+            "name": "com.unity.cinemachine",
+            "expression": "3.1.5",
+            "define": "UNITY_CINEMACHINE"
+        }
+    ],
+    "noEngineReferences": false
+}

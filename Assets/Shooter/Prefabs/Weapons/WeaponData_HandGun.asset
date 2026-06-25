@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5ff22f142bec4614a18f3ba08e85961, type: 3}
+  m_Name: WeaponData_HandGun
+  m_EditorClassIdentifier: Blocks.Gameplay.Shooter::Blocks.Gameplay.Shooter.WeaponData
+  weaponName: Handgun
+  weaponTypeID: 1
+  weaponIcon: {fileID: 21300000, guid: ca766460514364ca7bfa7c06d6ca2e54, type: 3}
+  reticleImage: {fileID: 21300000, guid: c957e948b81d34cc38ace0a4d898348f, type: 3}
+  reticleBaseSize: 30
+  reticleSpreadMultiplier: 100
+  handAttachmentNodeName: Right_Hand_Attach
+  idleAttachmentNodeName: Hip_Attach
+  weaponDamage: 25
+  recoil: {x: 0, y: 10, z: 0}
+  recoilReturnSpeed: 6
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 119
+  minShootingDistance: 0.5
+  clipSize: 12
+  reloadTime: 2
+  minSpreadAngle: 0.3
+  maxSpreadAngle: 0.5
+  spreadIncreasePerShot: 2
+  spreadRecoveryRate: 4
+  spreadRecoveryDelay: 0.2
+  spineOffset: {x: 14, y: 12, z: 0}
+  spineAimWeight: 1
+  muzzleFlashPrefab: {fileID: 5128621479578589028, guid: d5370334ebfc741919094c943fa694ee, type: 3}
+  bulletShellPrefab: {fileID: 1000013947318026, guid: 7ca96822084510147adb2aea03d45e3b, type: 3}
+  impactEffectPrefab: {fileID: 1000010355441670, guid: e0aa30b8adee8b44dac442776f34f5e7, type: 3}
+  impactEffectDuration: 2
+  soundDefShoot: {fileID: 11400000, guid: d0eb609f30ee83f48a6b4b0d3cac57e3, type: 2}
+  soundDefRicochet: {fileID: 11400000, guid: 63fcf0cd26cdf9b469e10c16e8766af7, type: 2}
+  tracerRadius: 0.003
+  tracerDuration: 0.03
+  tracerMaterial: {fileID: 2100000, guid: 5535a13cc0550489db8af368c5d7ba75, type: 2}
+  cameraShakeIntensity: 0.04

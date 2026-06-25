@@ -1,0 +1,71 @@
+{
+    "m_Dictionary": {
+        "m_DictionaryValues": [
+            {
+                "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "templateName",
+                "value": "{\"m_Value\":\"Multiplayer Third person gameplay\"}"
+            },
+            {
+                "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "templatePackageName",
+                "value": "{\"m_Value\":\"multiplayer-third-person-gameplay\"}"
+            },
+            {
+                "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "templateVersion",
+                "value": "{\"m_Value\":\"1.0.8\"}"
+            },
+            {
+                "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "templateDescription",
+                "value": "{\"m_Value\":\"A multiplayer prototyping kit that uses Netcode for GameObjects, features Unity Building Blocks content for quick iteration.\"}"
+            },
+            {
+                "type": "Unity.Template.Authoring.Editor.TestPlatforms, Unity.Template.Authoring.Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "key": "testPlatforms",
+                "value": "{\"m_Value\":7}"
+            },
+            {
+                "type": "Unity.Template.Authoring.Editor.UnityEditorVersions, Unity.Template.Authoring.Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "key": "testEditorVersions",
+                "value": "{\"m_Value\":16}"
+            },
+            {
+                "type": "Unity.Template.Authoring.Editor.UnityEditorVersions, Unity.Template.Authoring.Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "key": "minimumUnityVersion",
+                "value": "{\"m_Value\":16}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "firstTime",
+                "value": "{\"m_Value\":false}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "IncludesExternalContribution",
+                "value": "{\"m_Value\":false}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "includeIET",
+                "value": "{\"m_Value\":false}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "includeIETCards",
+                "value": "{\"m_Value\":true}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "autoGeneratePackageName",
+                "value": "{\"m_Value\":true}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "manageYamato",
+                "value": "{\"m_Value\":true}"
+            }
+        ]
+    }
+}

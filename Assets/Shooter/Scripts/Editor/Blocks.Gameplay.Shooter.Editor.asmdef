@@ -1,0 +1,29 @@
+{
+    "name": "Blocks.Gameplay.Shooter.Editor",
+    "rootNamespace": "Blocks.Gameplay.Shooter.Editor",
+    "references": [
+        "GUID:3e40dc395626b4d2eb45571a9dbe52c0",
+        "GUID:1491147abca9d7d4bb7105af628b223e",
+        "GUID:9f4f5bf029cebb64f983b7bdc29f62a1",
+        "GUID:3f035c4be183d4750ab15df81f89f9df"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "UNITY_NETCODE_GAMEOBJECTS"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.unity.netcode.gameobjects",
+            "expression": "2.0.0",
+            "define": "UNITY_NETCODE_GAMEOBJECTS"
+        }
+    ],
+    "noEngineReferences": false
+}

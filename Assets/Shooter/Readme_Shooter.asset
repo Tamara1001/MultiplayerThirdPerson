@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf7219bab7fe46a1ad266029b2fee19, type: 3}
+  m_Name: Readme_Shooter
+  m_EditorClassIdentifier: Assembly-CSharp::Readme
+  icon: {fileID: 2800000, guid: 45d6df54b44644a7897a8f7b09641c73, type: 3}
+  title: Shooter - Extending Core with Combat & Weapons
+  sections:
+  - heading: Welcome to Shooter
+    text: Shooter extends Core with examples of ModularWeapon and combat systems for creating weapons, projectiles, and shooting mechanics with networked multiplayer support.
+    linkText: 
+    url: 
+    assetGuid:
+  - heading: "Basic Networking Scene"
+    text: Simple multiplayer scene using GameNetworkManager for basic host/client connections. NetworkManager spawns the [BB] ShooterPlayer prefab.
+    linkText: "[BB] Shooter"
+    url: 
+    assetGuid: ca11eb50b69e04df28644ca096307470
+  - heading: "Multiplayer with Services"
+    text: Multiplayer scene with Blocks session management and Unity Gaming Services integration. NetworkManager spawns the [BB] ShooterPlayer prefab.
+    linkText: "[BB] Shooter MultiplayerSession"
+    url: 
+    assetGuid: 7d42b85864099114e8d3c5e25250b013
+  - heading: "Shooter Player Prefab"
+    text: Player prefab with WeaponController and ModularWeapon system for combat interactions.
+    linkText: "[BB] ShooterPlayer Prefab"
+    url: 
+    assetGuid: 2b93a04a4a84044e189f8cb194f89563
+  - heading: "Start Exploring"
+    text: Search project for prefabs starting with <b>Weapon_</b> and see the <b>ModularWeapon</b> component on it. Use the modular ui to modify the weapons. All weapons that spawn for the player can be found in WeaponLoadout asset
+    linkText: WeaponLoadout
+    url: 
+    assetGuid: ca92c5d6916f947a7a261a9e8b14e652
+  - heading: "Documentation & Tutorials"
+    text: Learn how to make your own custom weapons and shooting behaviors
+    linkText: View Tutorials
+    url: https://docs.unity3d.com/Packages/com.unity.template.multiplayer-third-person-gameplay@1.0/manual/index.html
+    assetGuid:
+  loadedLayout: 0

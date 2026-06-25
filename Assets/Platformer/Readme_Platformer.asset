@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf7219bab7fe46a1ad266029b2fee19, type: 3}
+  m_Name: Readme_Platformer
+  m_EditorClassIdentifier: Assembly-CSharp::Readme
+  icon: {fileID: 2800000, guid: 45d6df54b44644a7897a8f7b09641c73, type: 3}
+  title: Platformer - Extending Core with Movement & Interactions
+  sections:
+  - heading: Welcome to Platformer
+    text: Platformer extends Core with examples of ModularInteractable and IInteractionEffect implementations for creating jump pads, teleporters, collectibles, and more. Also includes AutomatedNetworkTransform for moving platforms and custom movement abilities.
+    linkText: 
+    url: 
+    assetGuid:
+  - heading: "Basic Networking Scene"
+    text: Simple multiplayer scene using GameNetworkManager for basic host/client connections. NetworkManager spawns the [BB] PlatformerPlayer prefab.
+    linkText: "[BB] Platformer"
+    url: 
+    assetGuid: 4e44aede820bc4317a6a9afc9a194aea
+  - heading: "Multiplayer with Services"
+    text: Multiplayer scene with Blocks session management and Unity Gaming Services integration. NetworkManager spawns the [BB] PlatformerPlayer prefab.
+    linkText: "[BB] Platformer MultiplayerSession"
+    url: 
+    assetGuid: 46163feafa167ab45826fb15439b5e0d
+  - heading: "Platformer Player Prefab"
+    text: Player prefab with PlatformerLocomotionAbility (custom movement) and PlatformerMovingPlatformAbility for platform interactions.
+    linkText: "[BB] PlatformerPlayer Prefab"
+    url: 
+    assetGuid: 1a9d8fc63d3ea448c91624031258fe92
+  - heading: "Start Exploring"
+    text: Search for GameObjects with <b>ModularInteractable</b> and <b>AutomatedNetworkTransform</b> in the scene and use the inspector to create interactions for platformer.
+    linkText: 
+    url: 
+    assetGuid:
+  - heading: "Documentation & Tutorials"
+    text: Learn how to make your own custom interactions
+    linkText: View Tutorials
+    url: https://docs.unity3d.com/Packages/com.unity.template.multiplayer-third-person-gameplay@1.0/manual/index.html
+    assetGuid:
+  loadedLayout: 0
