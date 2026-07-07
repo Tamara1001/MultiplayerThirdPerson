@@ -67,6 +67,15 @@ namespace Blocks.Gameplay.Shooter
             float finalDamage = CalculateDamage(info);
             coreStats.ModifyStat(StatKeys.Health, -finalDamage, info.attackerId, ModificationSource.Damage);
 
+            // NUEVO — detectar golpe fatal y avisarle al atacante ---
+            bool wasKillingBlow = healthBefore > 0f && coreStats.GetCurrentValue(StatKeys.Health) <= 0f;
+            if (wasKillingBlow)
+            {
+                RegisterKillForAttacker(info.attackerId);
+            }
+
+            // ---
+
             if (shooterAnimator != null && shooterAnimator.Animator != null)
             {
                 shooterAnimator.Animator.ResetTrigger(m_AnimIDPlayerHit);
@@ -104,6 +113,18 @@ namespace Blocks.Gameplay.Shooter
             }
             return damage;
         }
+
+        // ---
+        private void RegisterKillForAttacker(ulong attackerId)
+        {
+            if (NetworkManager.Singleton.ConnectedClients.TryGetValue(attackerId, out var client) && client.PlayerObject != null)
+            {
+                var attackerState = client.PlayerObject.GetComponent<CorePlayerState>();
+                attackerState?.AddKill();
+            }
+        }
+
+        // ---
 
         private void CreateHitFeedback(Vector3 hitPoint, float actualDamage, bool isAttacker)
         {

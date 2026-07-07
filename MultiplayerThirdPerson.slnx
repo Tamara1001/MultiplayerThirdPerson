@@ -1,7 +1,7 @@
 ﻿<Solution>
   <Project Path="Blocks.Gameplay.Platformer.csproj" />
-  <Project Path="Blocks.Gameplay.Shooter.Editor.csproj" />
   <Project Path="Blocks.Gameplay.Core.csproj" />
+  <Project Path="Blocks.Gameplay.Shooter.Editor.csproj" />
   <Project Path="Blocks.Sessions.Common.csproj" />
   <Project Path="Blocks.Gameplay.Core.Editor.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />

@@ -29,6 +29,10 @@ namespace Blocks.Gameplay.Core
         [Header("Session Setup")]
         [Tooltip("Configuration settings for the multiplayer session.")]
         [SerializeField] private SessionSettings sessionSettings;
+        // ---
+        [SerializeField] private NetworkObject matchManagerPrefab;
+        private bool m_MatchManagerSpawned = false;
+        // ---
 
         [Tooltip("UI Document that displays session/lobby interface.")]
         [SerializeField] private UIDocument sessionUI;
@@ -86,6 +90,21 @@ namespace Blocks.Gameplay.Core
                 m_SessionObserver = null;
             }
         }
+
+        // ---
+        private void TrySpawnMatchManager()
+        {
+            if (m_MatchManagerSpawned || MatchManager.Instance != null) return;
+
+            if (NetworkManager.Singleton.LocalClient.IsSessionOwner)
+            {
+                var obj = Instantiate(matchManagerPrefab);
+                obj.SpawnWithOwnership(NetworkManager.Singleton.LocalClientId);
+                m_MatchManagerSpawned = true;
+            }
+        }
+
+        // ---
 
         /// <summary>
         /// Initializes the singleton instance and sets up session observer if using Multiplayer Services.

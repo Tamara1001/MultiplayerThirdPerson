@@ -39,6 +39,15 @@ namespace Blocks.Gameplay.Core
         [Tooltip("Global ScriptableObject event raised when player state changes.")]
         [SerializeField] private PlayerStateEvent onPlayerStateChangedGlobal;
 
+        // ------
+        private readonly NetworkVariable<int> m_KillCount = new NetworkVariable<int>(
+    0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
+        public int KillCount => m_KillCount.Value;
+        public event Action<int> OnKillCountChanged;
+
+        // ------
+
         // Networked variable for the player name
         // Everyone can read, only the owner can write directly
         private readonly NetworkVariable<FixedString64Bytes> m_NetworkedPlayerName = new NetworkVariable<FixedString64Bytes>(
@@ -91,6 +100,10 @@ namespace Blocks.Gameplay.Core
             // Subscribe to value changes to trigger the local event
             m_NetworkedPlayerName.OnValueChanged += HandleNameChanged;
             m_LifeState.OnValueChanged += HandleLifeStateChanged;
+            // ---
+            m_KillCount.OnValueChanged += HandleKillCountChanged;
+            OnKillCountChanged?.Invoke(m_KillCount.Value);
+            // ---
 
             // For late-joining clients, network variables may already have values set
             // Trigger events immediately to ensure subscribers receive the current state
@@ -107,6 +120,9 @@ namespace Blocks.Gameplay.Core
         {
             m_NetworkedPlayerName.OnValueChanged -= HandleNameChanged;
             m_LifeState.OnValueChanged -= HandleLifeStateChanged;
+            // ---
+            m_KillCount.OnValueChanged -= HandleKillCountChanged;
+            // ---
         }
 
         #endregion
@@ -121,6 +137,8 @@ namespace Blocks.Gameplay.Core
         /// <param name="newName">The new name to set for the player.</param>
         public void SetPlayerName(string newName)
         {
+
+
             if (string.IsNullOrEmpty(newName)) return;
 
             if (IsOwner)
@@ -133,6 +151,21 @@ namespace Blocks.Gameplay.Core
                 SetPlayerNameRpc(newName);
             }
         }
+
+        // ---
+        public void AddKill()
+        {
+            if (IsOwner) m_KillCount.Value += 1;
+            else AddKillRpc();
+        }
+
+        public void ResetKills()
+        {
+            if (IsOwner) m_KillCount.Value = 0;
+            else ResetKillsRpc();
+        }
+
+        // ---
 
         /// <summary>
         /// Sets the player's life state.
@@ -168,6 +201,16 @@ namespace Blocks.Gameplay.Core
             m_NetworkedPlayerName.Value = new FixedString64Bytes(newName);
         }
 
+        // ---
+
+        [Rpc(SendTo.Owner)]
+        private void AddKillRpc() => m_KillCount.Value += 1;
+
+        [Rpc(SendTo.Owner)]
+        private void ResetKillsRpc() => m_KillCount.Value = 0;
+
+        // ---
+
         /// <summary>
         /// RPC sent to the owner to set the life state.
         /// Required because network variables with Owner write permission can only be set by the owner.
@@ -200,6 +243,11 @@ namespace Blocks.Gameplay.Core
                 onPlayerStateChangedGlobal.Raise(new PlayerStatePayload { playerId = OwnerClientId, newState = newState, oldState = oldState });
             }
         }
+
+        // ---
+        private void HandleKillCountChanged(int oldVal, int newVal) => OnKillCountChanged?.Invoke(newVal);
+
+        // ---
 
         #endregion
     }
