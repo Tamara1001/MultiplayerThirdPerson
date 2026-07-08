@@ -3,6 +3,8 @@ using Unity.Netcode;
 using Unity.Cinemachine;
 using Blocks.Gameplay.Core;
 
+using System.Collections;
+
 namespace Blocks.Gameplay.Shooter
 {
     /// <summary>
@@ -136,7 +138,7 @@ namespace Blocks.Gameplay.Shooter
 
             if (m_FiringMechanism != null && m_StateManager.CurrentState == WeaponState.ReadyToFire)
             {
-                m_FiringMechanism.UpdateFiring(Time.deltaTime);
+                m_FiringMechanism.UpdateFiring(Time.deltaTime * FireRateMultiplier);
             }
 
             if (m_ShootingBehavior != null && m_FireButtonHeld)
@@ -336,6 +338,24 @@ namespace Blocks.Gameplay.Shooter
         {
             PlayImpactEffectRpc(position, normal, damage, parentRef);
         }
+
+        // ---
+        public float FireRateMultiplier { get; private set; } = 1f;
+
+        public void ApplyFireRateBuff(float multiplier, float duration)
+        {
+            if (!IsOwner) return;
+            StartCoroutine(FireRateBuffRoutine(multiplier, duration));
+        }
+
+        private IEnumerator FireRateBuffRoutine(float multiplier, float duration)
+        {
+            FireRateMultiplier = multiplier;
+            yield return new WaitForSeconds(duration);
+            FireRateMultiplier = 1f;
+        }
+
+        // ---
 
         #endregion
 

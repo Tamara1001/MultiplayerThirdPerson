@@ -65,16 +65,15 @@ namespace Blocks.Gameplay.Shooter
             }
 
             float finalDamage = CalculateDamage(info);
+            float healthBefore = coreStats.GetCurrentValue(StatKeys.Health);
+
             coreStats.ModifyStat(StatKeys.Health, -finalDamage, info.attackerId, ModificationSource.Damage);
 
-            // NUEVO — detectar golpe fatal y avisarle al atacante ---
             bool wasKillingBlow = healthBefore > 0f && coreStats.GetCurrentValue(StatKeys.Health) <= 0f;
             if (wasKillingBlow)
             {
                 RegisterKillForAttacker(info.attackerId);
             }
-
-            // ---
 
             if (shooterAnimator != null && shooterAnimator.Animator != null)
             {
@@ -82,7 +81,6 @@ namespace Blocks.Gameplay.Shooter
                 shooterAnimator.Animator.SetTrigger(m_AnimIDPlayerHit);
             }
 
-            // Apply impact shake effect using explosion impulse with short duration
             CoreDirector.RequestCameraShake()
                 .WithImpulseDefinition(CinemachineImpulseDefinition.ImpulseShapes.Explosion,
                     CinemachineImpulseDefinition.ImpulseTypes.Dissipating,

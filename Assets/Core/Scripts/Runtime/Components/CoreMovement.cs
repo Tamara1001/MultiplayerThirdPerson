@@ -1,8 +1,9 @@
 using System;
-using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.Netcode.Components;
-using System.Collections.Generic;
+using UnityEngine;
 
 namespace Blocks.Gameplay.Core
 {
@@ -533,6 +534,39 @@ namespace Blocks.Gameplay.Core
             m_ArealVelocity = Vector3.zero;
             gravity = m_InitialGravity;
         }
+
+        // ---
+        public void ApplyMoveSpeedBuff(float multiplier, float duration)
+        {
+            if (!IsOwner) return;
+            StartCoroutine(MoveSpeedBuffRoutine(multiplier, duration));
+        }
+
+        public void ApplyJumpHeightBuff(float multiplier, float duration)
+        {
+            if (!IsOwner) return;
+            StartCoroutine(JumpHeightBuffRoutine(multiplier, duration));
+        }
+
+        private IEnumerator MoveSpeedBuffRoutine(float multiplier, float duration)
+        {
+            float originalMove = moveSpeed, originalSprint = sprintSpeed;
+            moveSpeed *= multiplier;
+            sprintSpeed *= multiplier;
+            yield return new WaitForSeconds(duration);
+            moveSpeed = originalMove;
+            sprintSpeed = originalSprint;
+        }
+
+        private IEnumerator JumpHeightBuffRoutine(float multiplier, float duration)
+        {
+            float original = jumpHeight;
+            jumpHeight *= multiplier;
+            yield return new WaitForSeconds(duration);
+            jumpHeight = original;
+        }
+
+        // ---
 
         #endregion
 
