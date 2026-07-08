@@ -21,4 +21,9 @@
         <ui:VisualElement name="message-divider"/>
         <ui:Label name="countdown-label" text="05"/>
     </ui:VisualElement>
+    <ui:VisualElement name="winner-screen" style="flex-grow: 1; display: none;">
+        <ui:Label text="Label" name="winner-label"/>
+    </ui:VisualElement>
+    <ui:Label text="Label" name="kill-count-label"/>
+    <ui:Label text="Label" name="match-timer-label"/>
 </ui:UXML>

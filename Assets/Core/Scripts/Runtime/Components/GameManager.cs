@@ -96,11 +96,14 @@ namespace Blocks.Gameplay.Core
         {
             if (m_MatchManagerSpawned || MatchManager.Instance != null) return;
 
+            Debug.Log($"[MatchManager] ¿Soy session owner? {NetworkManager.Singleton.LocalClient.IsSessionOwner}");
+
             if (NetworkManager.Singleton.LocalClient.IsSessionOwner)
             {
                 var obj = Instantiate(matchManagerPrefab);
                 obj.SpawnWithOwnership(NetworkManager.Singleton.LocalClientId);
                 m_MatchManagerSpawned = true;
+                Debug.Log("[MatchManager] ¡Spawneado con éxito!");
             }
         }
 
@@ -261,6 +264,8 @@ namespace Blocks.Gameplay.Core
                 {
                     Debug.LogWarning("[GameManager] CoreStatsHandler component not found on local player. Cannot restore health.", this);
                 }
+
+                TrySpawnMatchManager(); // <--
             }
         }
 
@@ -338,6 +343,8 @@ namespace Blocks.Gameplay.Core
             {
                 Debug.LogWarning("[GameManager] CoreStatsHandler component not found on local player. Cannot restore health.", this);
             }
+
+            TrySpawnMatchManager(); // <--
         }
 
         /// <summary>

@@ -17,20 +17,27 @@ namespace Blocks.Gameplay.Core
         {
             base.Initialize();
 
-            if (MatchManager.Instance != null)
-            {
-                MatchManager.Instance.OnTimerUpdated += UpdateTimerDisplay;
-                MatchManager.Instance.OnMatchEndedEvent += ShowWinnerScreen;
-            }
+            StartCoroutine(WaitForMatchManagerAndSubscribe());
 
             var localPlayer = NetworkManager.Singleton.LocalClient.PlayerObject;
             var playerState = localPlayer != null ? localPlayer.GetComponent<CorePlayerState>() : null;
             if (playerState != null)
             {
                 playerState.OnKillCountChanged += UpdateKillCountDisplay;
+                UpdateKillCountDisplay(playerState.KillCount); // valor inicial, por si ya hay kills
             }
 
             if (m_WinnerScreen != null) m_WinnerScreen.style.display = DisplayStyle.None;
+        }
+
+        private IEnumerator WaitForMatchManagerAndSubscribe()
+        {
+            yield return new WaitUntil(() => MatchManager.Instance != null);
+
+            MatchManager.Instance.OnTimerUpdated += UpdateTimerDisplay;
+            MatchManager.Instance.OnMatchEndedEvent += ShowWinnerScreen;
+
+            UpdateTimerDisplay(MatchManager.Instance.TimeRemaining); // valor inicial, así arranca mostrando 05:00 ya
         }
 
         protected override void QueryHUDElements(VisualElement root)
