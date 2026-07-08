@@ -73,6 +73,13 @@ namespace Blocks.Gameplay.Core
         /// Called when the GameManager is destroyed.
         /// Cleans up all event subscriptions and observers to prevent memory leaks.
         /// </summary>
+        /// 
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void ResetStaticInstance()
+        {
+            Instance = null;
+        }
         private void OnDestroy()
         {
             // Cleanup NetworkManager callbacks
@@ -95,15 +102,13 @@ namespace Blocks.Gameplay.Core
         private void TrySpawnMatchManager()
         {
             if (m_MatchManagerSpawned || MatchManager.Instance != null) return;
-
-            Debug.Log($"[MatchManager] ¿Soy session owner? {NetworkManager.Singleton.LocalClient.IsSessionOwner}");
-
+            Debug.LogError($"[MatchManager] ¿Soy session owner? {NetworkManager.Singleton.LocalClient.IsSessionOwner}");
             if (NetworkManager.Singleton.LocalClient.IsSessionOwner)
             {
                 var obj = Instantiate(matchManagerPrefab);
                 obj.SpawnWithOwnership(NetworkManager.Singleton.LocalClientId);
                 m_MatchManagerSpawned = true;
-                Debug.Log("[MatchManager] ¡Spawneado con éxito!");
+                Debug.LogError("[MatchManager] ¡Spawneado con éxito!");
             }
         }
 
@@ -280,6 +285,8 @@ namespace Blocks.Gameplay.Core
         /// <param name="session">The session that was added.</param>
         private void OnSessionAdded(ISession session)
         {
+            Debug.LogError("[GameManager] ENTRÉ a OnSessionAdded"); // NUEVO, primera línea
+
             if (session == null)
             {
                 Debug.LogError("[GameManager] OnSessionAdded called with null session.", this);

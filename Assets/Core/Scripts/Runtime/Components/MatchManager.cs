@@ -26,6 +26,13 @@ namespace Blocks.Gameplay.Core
         public event System.Action<float> OnTimerUpdated;
         public event System.Action<ulong> OnMatchEndedEvent;
 
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void ResetStaticInstance()
+        {
+            Instance = null;
+        }
+
         public override void OnNetworkSpawn()
         {
             Instance = this;
