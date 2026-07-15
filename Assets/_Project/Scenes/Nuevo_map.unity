@@ -897,6 +897,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1158339049454323220, guid: f7a5e3aef11ab3d4a9f0cda111f6fc78, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.56773
+      objectReference: {fileID: 0}
+    - target: {fileID: 1158339049454323220, guid: f7a5e3aef11ab3d4a9f0cda111f6fc78, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1158339049454323220, guid: f7a5e3aef11ab3d4a9f0cda111f6fc78, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 19.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2377173956418845712, guid: f7a5e3aef11ab3d4a9f0cda111f6fc78, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14.93227
@@ -937,10 +949,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3345004702233082674, guid: f7a5e3aef11ab3d4a9f0cda111f6fc78, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 4620940470728743790, guid: f7a5e3aef11ab3d4a9f0cda111f6fc78, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -66.56773
+      objectReference: {fileID: 0}
+    - target: {fileID: 4620940470728743790, guid: f7a5e3aef11ab3d4a9f0cda111f6fc78, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4620940470728743790, guid: f7a5e3aef11ab3d4a9f0cda111f6fc78, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 19.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4833605474760596176, guid: f7a5e3aef11ab3d4a9f0cda111f6fc78, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 5424872870451436659, guid: f7a5e3aef11ab3d4a9f0cda111f6fc78, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.93227
+      objectReference: {fileID: 0}
+    - target: {fileID: 5424872870451436659, guid: f7a5e3aef11ab3d4a9f0cda111f6fc78, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5424872870451436659, guid: f7a5e3aef11ab3d4a9f0cda111f6fc78, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7011960315327601066, guid: f7a5e3aef11ab3d4a9f0cda111f6fc78, type: 3}
       propertyPath: m_Name
       value: Spawns-PowerUps
       objectReference: {fileID: 0}
+    - target: {fileID: 7540395851606003120, guid: f7a5e3aef11ab3d4a9f0cda111f6fc78, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
