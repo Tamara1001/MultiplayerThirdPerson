@@ -144,6 +144,7 @@ namespace Blocks.Gameplay.Core
 
             if (IsOwner)
             {
+                Debug.Log("[MatchManager] OnNetworkSpawn: I am the Owner. Forcing Match to ACTIVE state and starting timer!");
                 m_TimeRemaining.Value = matchDuration;
                 m_MatchEnded.Value    = false;
                 m_Phase.Value         = MatchPhase.Active;
@@ -168,12 +169,21 @@ namespace Blocks.Gameplay.Core
         // Unity Update (session owner only)
         // ─────────────────────────────────────────────────────────────────────────
 
+        private float m_NextLogTime = 0f;
+
         private void Update()
         {
             // Only the session owner runs the timer
             if (!IsOwner || m_MatchEnded.Value) return;
 
             m_TimeRemaining.Value -= Time.deltaTime;
+
+            if (Time.time >= m_NextLogTime)
+            {
+                Debug.Log($"[MatchManager] Timer ticking down: {m_TimeRemaining.Value} seconds remaining.");
+                m_NextLogTime = Time.time + 10f; // Log every 10 seconds to avoid spam
+            }
+
             if (m_TimeRemaining.Value <= 0f)
             {
                 m_TimeRemaining.Value = 0f;

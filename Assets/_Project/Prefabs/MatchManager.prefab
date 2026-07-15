@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3181351573978387774}
   - component: {fileID: 6327441732370988069}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: MatchManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 1429447332
-  InScenePlacedSourceGlobalObjectIdHash: 0
+  GlobalObjectIdHash: 1163395337
+  InScenePlacedSourceGlobalObjectIdHash: 1163395337
   DeferredDespawnTick: 0
   Ownership: 1
   AlwaysReplicateAsRoot: 0
@@ -73,3 +73,4 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   matchDuration: 300
   restartDelay: 5
+  spawnPoints: []

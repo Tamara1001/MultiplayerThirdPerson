@@ -99,10 +99,18 @@ namespace Blocks.Gameplay.Core
         }
 
         // ---
+        private bool m_IsSpawningMatchManager = false;
+
         private void TrySpawnMatchManager()
         {
-            if (m_MatchManagerSpawned || MatchManager.Instance != null) return;
+            // Ultimate safety check: see if it actually exists in the scene before trying to spawn
+            if (m_MatchManagerSpawned || m_IsSpawningMatchManager || MatchManager.Instance != null || FindFirstObjectByType<MatchManager>() != null) 
+            {
+                return;
+            }
             
+            // Lock out any other attempts to spawn
+            m_IsSpawningMatchManager = true;
             StartCoroutine(SpawnMatchManagerRoutine());
         }
 
@@ -114,29 +122,58 @@ namespace Blocks.Gameplay.Core
             // Only the server/host should spawn the MatchManager
             if (NetworkManager.Singleton.IsServer)
             {
-                var obj = Instantiate(matchManagerPrefab);
-                
-                if (obj.TryGetComponent<NetworkObject>(out var netObj))
+                // Double check it hasn't somehow spawned while we were waiting
+                if (MatchManager.Instance == null && FindFirstObjectByType<MatchManager>() == null)
                 {
-                    netObj.SpawnWithOwnership(NetworkManager.Singleton.LocalClientId);
-                    m_MatchManagerSpawned = true;
-                    Debug.Log("[MatchManager] Spawned successfully by the Server!");
-                }
-                else
-                {
-                    Debug.LogError("[MatchManager] matchManagerPrefab is missing a NetworkObject component!");
+                    var obj = Instantiate(matchManagerPrefab);
+                    
+                    if (obj.TryGetComponent<NetworkObject>(out var netObj))
+                    {
+                        netObj.SpawnWithOwnership(NetworkManager.Singleton.LocalClientId);
+                        m_MatchManagerSpawned = true;
+                        Debug.Log("[MatchManager] Spawned successfully by the Server!");
+                    }
+                    else
+                    {
+                        Debug.LogError("[MatchManager] matchManagerPrefab is missing a NetworkObject component!");
+                    }
                 }
             }
         }
 
-        // ---
+        private float m_FallbackSpawnTimer = 0f;
 
-        /// <summary>
-        /// Initializes the singleton instance and sets up session observer if using Multiplayer Services.
-        /// Prevents duplicate GameManager instances using the singleton pattern with DontDestroyOnLoad.
-        /// </summary>
+        private void Update()
+        {
+            // Aggressive, foolproof fallback: If we are the Server, and the MatchManager is missing, SPAWN IT.
+            // But wait 2 seconds after the server starts before deciding it's truly missing.
+            if (!m_MatchManagerSpawned && !m_IsSpawningMatchManager && MatchManager.Instance == null)
+            {
+                if (NetworkManager.Singleton != null && NetworkManager.Singleton.IsListening && NetworkManager.Singleton.IsServer)
+                {
+                    m_FallbackSpawnTimer += Time.deltaTime;
+                    if (m_FallbackSpawnTimer > 2.0f)
+                    {
+                        if (FindFirstObjectByType<MatchManager>() == null)
+                        {
+                            Debug.LogWarning("[GameManager] Update detected missing MatchManager after 2 seconds of Server being active! Forcing spawn...");
+                            TrySpawnMatchManager();
+                        }
+                        else
+                        {
+                            // It was found in the scene but Instance wasn't set, or m_MatchManagerSpawned wasn't true.
+                            // Fix the flags to stop polling.
+                            m_MatchManagerSpawned = true;
+                        }
+                    }
+                }
+            }
+        }// ---
+
         private void Awake()
         {
+            Debug.Log($"[GameManager] Awake called on GameObject: {gameObject.name}");
+
             // Enforce singleton pattern
             if (Instance != null && Instance != this)
             {
@@ -151,32 +188,55 @@ namespace Blocks.Gameplay.Core
             // Validate required references
             if (sessionUI == null)
             {
-                Debug.LogError("[GameManager] SessionUI is not assigned.", this);
+                Debug.LogError("[GameManager] SessionUI is not assigned! This will cause GameManager to abort initialization.", this);
             }
             if (sessionSettings == null)
             {
-                Debug.LogError("[GameManager] SessionSettings is not assigned.", this);
+                Debug.LogError("[GameManager] SessionSettings is not assigned! This will cause GameManager to abort initialization.", this);
             }
+            if (matchManagerPrefab == null)
+            {
+                Debug.LogError("[GameManager] matchManagerPrefab is not assigned! MatchManager will NEVER spawn.", this);
+            }
+
             if (sessionUI == null || sessionSettings == null)
             {
+                Debug.LogError("[GameManager] Aborting initialization due to missing Inspector references.");
                 return;
             }
 
             // Initialize Multiplayer Services session observer if enabled
             if (isUsingMultiplayerServices)
             {
+                Debug.Log($"[GameManager] Multiplayer Services enabled. Subscribing to SessionAdded for Type: {sessionSettings.sessionType}");
                 m_SessionObserver = new SessionObserver(sessionSettings.sessionType);
                 m_SessionObserver.SessionAdded += OnSessionAdded;
             }
+            else
+            {
+                Debug.Log("[GameManager] Multiplayer Services DISABLED. Falling back to local callbacks.");
+            }
         }
 
-        /// <summary>
-        /// Subscribes to NetworkManager callbacks when using standard NetworkManager mode.
-        /// Skipped if using Multiplayer Services.
-        /// </summary>
         private void Start()
         {
-            if (isUsingMultiplayerServices) return;
+            Debug.Log("[GameManager] Start called.");
+            
+            if (NetworkManager.Singleton != null)
+            {
+                Debug.Log("[GameManager] NetworkManager.Singleton exists. Subscribing to OnServerStarted.");
+                NetworkManager.Singleton.OnServerStarted += TrySpawnMatchManager;
+            }
+            else
+            {
+                Debug.LogWarning("[GameManager] NetworkManager.Singleton is NULL in Start! MatchManager will rely on polling.");
+            }
+
+            if (isUsingMultiplayerServices) 
+            {
+                Debug.Log("[GameManager] Start: Using Multiplayer Services, skipping local ClientConnected subscription.");
+                return;
+            }
 
             if (NetworkManager.Singleton == null)
             {
@@ -184,6 +244,7 @@ namespace Blocks.Gameplay.Core
                 return;
             }
 
+            Debug.Log("[GameManager] Start: Subscribing to local NetworkManager callbacks.");
             NetworkManager.Singleton.OnClientConnectedCallback += ClientConnected;
             NetworkManager.Singleton.OnClientDisconnectCallback += ClientDisconnected;
         }

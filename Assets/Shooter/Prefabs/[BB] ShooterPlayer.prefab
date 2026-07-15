@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 1108927199896854533}
   - component: {fileID: 1563147582858549678}
   - component: {fileID: 6335676085073359025}
-  - component: {fileID: 8646187335525898243}
+  - component: {fileID: 8251435549216866732}
   - component: {fileID: 2088986350967450811}
   - component: {fileID: 1014273762148719169}
   - component: {fileID: 8588685517756285438}
@@ -562,7 +562,7 @@ MonoBehaviour:
   defaultLookSensitivity: 1
   defaultVerticalLookLimit: 70
   onLookInput: {fileID: 11400000, guid: 8af931367978e4bc9bae53b88856ff5b, type: 2}
---- !u!114 &8646187335525898243
+--- !u!114 &8251435549216866732
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -571,9 +571,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4416926081852918481}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21a8d50cb99224972a0c1a67f90a0128, type: 3}
+  m_Script: {fileID: 11500000, guid: c8da208d3d78f674c86ffcd6e8ee3dbf, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::FFA.KillFeedUI
   ShowTopMostFoldoutHeaderGroup: 1
   coreStats: {fileID: 1108927199896854533}
   onStatChanged: {fileID: 11400000, guid: 3c76cce5664154d7fadbc8eaf8987962, type: 2}
@@ -587,6 +587,10 @@ MonoBehaviour:
   onWeaponSpreadChanged: {fileID: 11400000, guid: 9bc2e682a3c574903a968681f1fc3374, type: 2}
   aimController: {fileID: 6606124303744922498}
   weaponReload: {fileID: 7838441725742136474}
+  onKillConfirmed: {fileID: 11400000, guid: 56d115072f41b9c4a824a8063e1db2cc, type: 2}
+  maxFeedEntries: 5
+  entryDisplayDuration: 4
+  entryFadeDuration: 0.4
 --- !u!114 &2088986350967450811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -739,7 +743,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Blocks.Gameplay.Shooter::Blocks.Gameplay.Shooter.ShooterAddon
   ShowTopMostFoldoutHeaderGroup: 1
-  weaponHUD: {fileID: 8646187335525898243}
+  weaponHUD: {fileID: 0}
   aimController: {fileID: 6606124303744922498}
   shooterAnimator: {fileID: 4776799937623358137}
   weaponController: {fileID: 492551780235547040}

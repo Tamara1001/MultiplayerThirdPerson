@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Blocks.Gameplay.Core;
+using Blocks.Gameplay.Shooter;
 
 namespace FFA
 {
@@ -42,7 +43,7 @@ namespace FFA
     /// └─────────────────────────────────────────────────────────────────────────────┘
     /// </summary>
     [AddComponentMenu("FFA/Kill Feed UI")]
-    public class KillFeedUI : CoreHUD
+    public class KillFeedUI : WeaponHUD
     {
         #region Inspector Fields
 
@@ -101,12 +102,11 @@ namespace FFA
 
         /// <summary>
         /// Called during OnNetworkSpawn to allow derived classes to perform additional initialization.
-        /// Starts the coroutine to wait for MatchManager.
         /// </summary>
         protected override void Initialize()
         {
             base.Initialize();
-            StartCoroutine(WaitForMatchManagerAndSubscribe());
+            // MatchManager subscription is now handled safely in Update() polling
         }
 
         // ──────────────────────────────────────────────────────────────────────
@@ -181,6 +181,9 @@ namespace FFA
         /// </summary>
         protected override void RegisterAdditionalListeners()
         {
+            // Call WeaponHUD's implementation to bind ammo, reload, and reticle events
+            base.RegisterAdditionalListeners();
+
             if (onKillConfirmed != null)
             {
                 onKillConfirmed.RegisterListener(HandleKillConfirmed);
@@ -194,28 +197,46 @@ namespace FFA
                     this);
             }
 
-            // Subscribe to local player's kill count
-            if (TryGetComponent<CorePlayerState>(out var playerState))
+            // Start polling for the local player's network object to bind the kill count
+            StartCoroutine(WaitForLocalPlayerAndSubscribe());
+        }
+
+        private IEnumerator WaitForLocalPlayerAndSubscribe()
+        {
+            // Wait for NetworkManager to exist and the local client to have a spawned player object
+            yield return new WaitUntil(() => 
+                Unity.Netcode.NetworkManager.Singleton != null && 
+                Unity.Netcode.NetworkManager.Singleton.LocalClient != null && 
+                Unity.Netcode.NetworkManager.Singleton.LocalClient.PlayerObject != null);
+
+            if (Unity.Netcode.NetworkManager.Singleton.LocalClient.PlayerObject.TryGetComponent<CorePlayerState>(out var playerState))
             {
                 playerState.OnKillCountChanged += UpdateKillCountDisplay;
                 UpdateKillCountDisplay(playerState.KillCount);
             }
+            else
+            {
+                Debug.LogWarning("[KillFeedUI] Could not find CorePlayerState on the local player object.");
+            }
         }
 
-        /// <summary>
-        /// Unsubscribes from <see cref="KillConfirmedEvent"/> on despawn
-        /// to prevent memory leaks and callbacks on destroyed objects.
-        /// </summary>
         protected override void UnregisterAdditionalListeners()
         {
+            // Call WeaponHUD's implementation to unbind ammo, reload, and reticle events
+            base.UnregisterAdditionalListeners();
+
             if (onKillConfirmed != null)
             {
                 onKillConfirmed.UnregisterListener(HandleKillConfirmed);
             }
 
-            if (TryGetComponent<CorePlayerState>(out var playerState))
+            if (Unity.Netcode.NetworkManager.Singleton != null && Unity.Netcode.NetworkManager.Singleton.LocalClient != null)
             {
-                playerState.OnKillCountChanged -= UpdateKillCountDisplay;
+                var playerObj = Unity.Netcode.NetworkManager.Singleton.LocalClient.PlayerObject;
+                if (playerObj != null && playerObj.TryGetComponent<CorePlayerState>(out var playerState))
+                {
+                    playerState.OnKillCountChanged -= UpdateKillCountDisplay;
+                }
             }
 
             if (MatchManager.Instance != null)
@@ -228,11 +249,24 @@ namespace FFA
 
         #region Match Info Logic
 
-        private IEnumerator WaitForMatchManagerAndSubscribe()
+        private bool m_IsSubscribedToTimer = false;
+
+        private void Update()
         {
-            yield return new WaitUntil(() => MatchManager.Instance != null);
-            MatchManager.Instance.OnTimerUpdated += UpdateTimerDisplay;
-            UpdateTimerDisplay(MatchManager.Instance.TimeRemaining);
+            if (!m_IsSubscribedToTimer && MatchManager.Instance != null && MatchManager.Instance.IsSpawned)
+            {
+                // Clear any old subscriptions just in case
+                MatchManager.Instance.OnTimerUpdated -= UpdateTimerDisplay;
+                
+                // Subscribe to future server ticks
+                MatchManager.Instance.OnTimerUpdated += UpdateTimerDisplay;
+                
+                // Immediately force a visual refresh with the authoritative networked time
+                UpdateTimerDisplay(MatchManager.Instance.TimeRemaining);
+                
+                m_IsSubscribedToTimer = true;
+                Debug.Log("[KillFeedUI] Successfully connected to MatchManager timer via Update polling!");
+            }
         }
 
         private void UpdateTimerDisplay(float timeRemaining)
