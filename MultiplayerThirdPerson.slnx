@@ -5,8 +5,8 @@
   <Project Path="Blocks.Sessions.Common.csproj" />
   <Project Path="Blocks.Gameplay.Core.Editor.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Blocks.Gameplay.Shooter.csproj" />
   <Project Path="Blocks.Sessions.csproj" />
-  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Blocks.Common.csproj" />
 </Solution>
