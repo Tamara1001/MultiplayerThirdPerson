@@ -59,6 +59,16 @@
         ─────────────────────────────────────────────────────────────────────── -->
         <ui:VisualElement name="kill-feed-container" class="kill-feed-container"/>
 
+        <!-- ── TOP-CENTER: Match Timer ────────────────────────────────────────── -->
+        <ui:VisualElement name="match-info-container" style="position: absolute; top: 10px; width: 100%; align-items: center; pointer-events: none;">
+            <ui:Label name="match-timer-label" text="05:00" style="font-size: 32px; -unity-font-style: bold; color: white; -unity-text-outline-width: 1px; -unity-text-outline-color: black;" />
+        </ui:VisualElement>
+
+        <!-- ── BOTTOM-RIGHT: Kill Count ──────────────────────────────────────── -->
+        <ui:VisualElement name="kill-count-container" style="position: absolute; bottom: 20px; right: 20px; align-items: flex-end; pointer-events: none;">
+            <ui:Label name="kill-count-label" text="KILLS : 0" style="font-size: 24px; -unity-font-style: bold; color: white; -unity-text-outline-width: 1px; -unity-text-outline-color: black;" />
+        </ui:VisualElement>
+
         <!-- ── CENTRE: Respawn countdown overlay (required by CoreHUD) ─────────── -->
         <ui:VisualElement name="message-overlay" style="display: none;">
             <ui:Label name="message-label" text="RESPAWNING IN"/>

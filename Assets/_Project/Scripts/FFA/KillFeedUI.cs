@@ -77,6 +77,10 @@ namespace FFA
         /// </summary>
         private readonly List<KillFeedEntry> m_ActiveEntries = new List<KillFeedEntry>();
 
+        // ─── Match Info Elements ──────────────────────────────────────────────
+        private Label m_MatchTimerLabel;
+        private Label m_KillCountLabel;
+
         #endregion
 
         #region Nested Types
@@ -94,6 +98,16 @@ namespace FFA
         #endregion
 
         #region CoreHUD Virtual Hook Overrides
+
+        /// <summary>
+        /// Called during OnNetworkSpawn to allow derived classes to perform additional initialization.
+        /// Starts the coroutine to wait for MatchManager.
+        /// </summary>
+        protected override void Initialize()
+        {
+            base.Initialize();
+            StartCoroutine(WaitForMatchManagerAndSubscribe());
+        }
 
         // ──────────────────────────────────────────────────────────────────────
         // QueryHUDElements
@@ -120,6 +134,18 @@ namespace FFA
                     "in the UIDocument's UXML. Kill feed will not render. " +
                     "Add the element to the UXML or assign the correct KillFeedUI.uxml asset.",
                     this);
+            }
+
+            m_MatchTimerLabel = root.Q<Label>("match-timer-label");
+            if (m_MatchTimerLabel == null)
+            {
+                Debug.LogError("[KillFeedUI] Could not find 'match-timer-label' in UXML.");
+            }
+
+            m_KillCountLabel = root.Q<Label>("kill-count-label");
+            if (m_KillCountLabel == null)
+            {
+                Debug.LogError("[KillFeedUI] Could not find 'kill-count-label' in UXML.");
             }
         }
 
@@ -167,6 +193,13 @@ namespace FFA
                     "Assign the KillConfirmedEvent asset in the Inspector.",
                     this);
             }
+
+            // Subscribe to local player's kill count
+            if (TryGetComponent<CorePlayerState>(out var playerState))
+            {
+                playerState.OnKillCountChanged += UpdateKillCountDisplay;
+                UpdateKillCountDisplay(playerState.KillCount);
+            }
         }
 
         /// <summary>
@@ -178,6 +211,44 @@ namespace FFA
             if (onKillConfirmed != null)
             {
                 onKillConfirmed.UnregisterListener(HandleKillConfirmed);
+            }
+
+            if (TryGetComponent<CorePlayerState>(out var playerState))
+            {
+                playerState.OnKillCountChanged -= UpdateKillCountDisplay;
+            }
+
+            if (MatchManager.Instance != null)
+            {
+                MatchManager.Instance.OnTimerUpdated -= UpdateTimerDisplay;
+            }
+        }
+
+        #endregion
+
+        #region Match Info Logic
+
+        private IEnumerator WaitForMatchManagerAndSubscribe()
+        {
+            yield return new WaitUntil(() => MatchManager.Instance != null);
+            MatchManager.Instance.OnTimerUpdated += UpdateTimerDisplay;
+            UpdateTimerDisplay(MatchManager.Instance.TimeRemaining);
+        }
+
+        private void UpdateTimerDisplay(float timeRemaining)
+        {
+            if (m_MatchTimerLabel == null) return;
+            
+            int minutes = Mathf.FloorToInt(timeRemaining / 60f);
+            int seconds = Mathf.FloorToInt(timeRemaining % 60f);
+            m_MatchTimerLabel.text = $"{minutes:00}:{seconds:00}";
+        }
+
+        private void UpdateKillCountDisplay(int kills)
+        {
+            if (m_KillCountLabel != null)
+            {
+                m_KillCountLabel.text = $"KILLS : {kills}";
             }
         }
 

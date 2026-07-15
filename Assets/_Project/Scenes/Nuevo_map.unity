@@ -452,6 +452,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NetworkManager
       objectReference: {fileID: 0}
+    - target: {fileID: 407875499802655079, guid: 011b03a6f560b45ccb17a870289c9b35, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 557752119097499956, guid: 011b03a6f560b45ccb17a870289c9b35, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.00837
@@ -1030,6 +1034,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SessionBrowser
       objectReference: {fileID: 0}
+    - target: {fileID: 3720844413458575749, guid: cb686d66dd0c6d647b6e401714aa1e2c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8080919655999100876, guid: cb686d66dd0c6d647b6e401714aa1e2c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1086,6 +1094,14 @@ PrefabInstance:
     - target: {fileID: 1420530876313129644, guid: 84f0b0c692db8df40b95ff21dfed2ae5, type: 3}
       propertyPath: m_Name
       value: KillFeedHUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420530876313129644, guid: 84f0b0c692db8df40b95ff21dfed2ae5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8283303496905556836, guid: 84f0b0c692db8df40b95ff21dfed2ae5, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8911382981077020598, guid: 84f0b0c692db8df40b95ff21dfed2ae5, type: 3}
       propertyPath: m_LocalPosition.x
