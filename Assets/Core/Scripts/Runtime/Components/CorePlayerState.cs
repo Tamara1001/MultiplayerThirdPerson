@@ -212,6 +212,31 @@ namespace Blocks.Gameplay.Core
         // ---
 
         /// <summary>
+        /// RPC sent to the owner to restore all stats to their maximum values.
+        /// Used by <see cref="MatchManager"/> when resetting the match so the server
+        /// can trigger a full heal without violating Owner write permission on the
+        /// <see cref="CoreStatsHandler"/> NetworkList.
+        ///
+        /// Calling pattern:
+        ///   Server iterates ConnectedClients → playerState.RequestFullHealRpc()
+        ///   → arrives on the player's own client → IsOwner is true here
+        ///   → CoreStatsHandler.ModifyStat is safe to call.
+        /// </summary>
+        [Rpc(SendTo.Owner)]
+        public void RequestFullHealRpc()
+        {
+            var stats = GetComponent<CoreStatsHandler>();
+            if (stats == null) return;
+
+            // Use a large positive value — ModifyStat clamps to maxValue internally.
+            // LocalClientId is used as the sourcePlayerId (self-heal, not combat damage).
+            stats.ModifyStat(StatKeys.Health,  999f, NetworkManager.Singleton.LocalClientId, ModificationSource.Regeneration);
+            stats.ModifyStat(StatKeys.Stamina, 999f, NetworkManager.Singleton.LocalClientId, ModificationSource.Regeneration);
+        }
+
+        // ---
+
+        /// <summary>
         /// RPC sent to the owner to set the life state.
         /// Required because network variables with Owner write permission can only be set by the owner.
         /// </summary>

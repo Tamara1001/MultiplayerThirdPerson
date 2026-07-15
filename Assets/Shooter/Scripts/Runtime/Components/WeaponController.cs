@@ -210,6 +210,43 @@ namespace Blocks.Gameplay.Shooter
             }
         }
 
+        /// <summary>
+        /// RPC sent to the owner to refill all weapons in the loadout to full ammo capacity.
+        /// Used by <see cref="MatchManager"/> when resetting the match so the server
+        /// can trigger an ammo reset without violating Owner write permission on
+        /// <see cref="AmmoHandler.m_CurrentClipAmmo"/> (a NetworkVariable).
+        ///
+        /// Calling pattern:
+        ///   Server iterates ConnectedClients → weaponController.RequestAmmoResetRpc()
+        ///   → arrives on the player's own client → IsOwner is true here
+        ///   → AmmoHandler.Reload() is safe to call (it guards with IsOwner internally).
+        ///
+        /// Note: <see cref="AmmoHandler.Reload"/> only refills the clip — it does NOT
+        /// trigger the reload animation. This is intentional for a match-reset scenario
+        /// where we want an instant, silent refill rather than the reload animation.
+        /// </summary>
+        [Rpc(SendTo.Owner)]
+        public void RequestAmmoResetRpc()
+        {
+            // Iterate all spawned weapons in the loadout (not just the currently equipped one).
+            // This ensures every weapon in the player's inventory is refilled.
+            foreach (var attachable in m_SpawnedWeaponAttachables)
+            {
+                if (attachable == null) continue;
+
+                var ammo = attachable.GetComponent<AmmoHandler>();
+                if (ammo != null)
+                {
+                    ammo.Reload();
+                }
+
+                // Also reset the WeaponStateManager to ReadyToFire so no weapon
+                // is stuck in a Reloading or Cooldown state after the match reset.
+                var stateManager = attachable.GetComponent<WeaponStateManager>();
+                stateManager?.TransitionToState(WeaponState.ReadyToFire);
+            }
+        }
+
         #endregion
 
         #region Private Methods

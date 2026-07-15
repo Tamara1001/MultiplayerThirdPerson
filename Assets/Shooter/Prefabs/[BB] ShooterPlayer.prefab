@@ -273,6 +273,7 @@ GameObject:
   - component: {fileID: 8172449239711994889}
   - component: {fileID: 6606124303744922498}
   - component: {fileID: 492551780235547040}
+  - component: {fileID: 9160729161068497648}
   m_Layer: 3
   m_Name: '[BB] ShooterPlayer'
   m_TagString: Player
@@ -827,6 +828,21 @@ MonoBehaviour:
   onPreviousWeaponPressedEvent: {fileID: 11400000, guid: 3421e308e61ef4449a9391ff47b6c74e, type: 2}
   onAimingStateChanged: {fileID: 11400000, guid: 1dc6e9c29e890454fbff5f80b1fbf777, type: 2}
   onWeaponChanged: {fileID: 11400000, guid: 2b831b903c0ec4c438a5db8f74441180, type: 2}
+--- !u!114 &9160729161068497648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416926081852918481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 924bffc12d07d544b8c4d1752772e48e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FFA.FFA_KillFeedAddon
+  ShowTopMostFoldoutHeaderGroup: 1
+  onStatChanged: {fileID: 11400000, guid: 3c76cce5664154d7fadbc8eaf8987962, type: 2}
+  onKillConfirmed: {fileID: 11400000, guid: 56d115072f41b9c4a824a8063e1db2cc, type: 2}
 --- !u!1 &6964032051100779426
 GameObject:
   m_ObjectHideFlags: 0
