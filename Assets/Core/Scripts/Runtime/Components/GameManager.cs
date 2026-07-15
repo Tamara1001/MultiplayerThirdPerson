@@ -102,13 +102,30 @@ namespace Blocks.Gameplay.Core
         private void TrySpawnMatchManager()
         {
             if (m_MatchManagerSpawned || MatchManager.Instance != null) return;
-            Debug.LogError($"[MatchManager] ¿Soy session owner? {NetworkManager.Singleton.LocalClient.IsSessionOwner}");
-            if (NetworkManager.Singleton.LocalClient.IsSessionOwner)
+            
+            StartCoroutine(SpawnMatchManagerRoutine());
+        }
+
+        private System.Collections.IEnumerator SpawnMatchManagerRoutine()
+        {
+            // Wait until the network is fully active
+            yield return new WaitUntil(() => NetworkManager.Singleton != null && NetworkManager.Singleton.IsListening);
+
+            // Only the server/host should spawn the MatchManager
+            if (NetworkManager.Singleton.IsServer)
             {
                 var obj = Instantiate(matchManagerPrefab);
-                obj.SpawnWithOwnership(NetworkManager.Singleton.LocalClientId);
-                m_MatchManagerSpawned = true;
-                Debug.LogError("[MatchManager] ¡Spawneado con éxito!");
+                
+                if (obj.TryGetComponent<NetworkObject>(out var netObj))
+                {
+                    netObj.SpawnWithOwnership(NetworkManager.Singleton.LocalClientId);
+                    m_MatchManagerSpawned = true;
+                    Debug.Log("[MatchManager] Spawned successfully by the Server!");
+                }
+                else
+                {
+                    Debug.LogError("[MatchManager] matchManagerPrefab is missing a NetworkObject component!");
+                }
             }
         }
 

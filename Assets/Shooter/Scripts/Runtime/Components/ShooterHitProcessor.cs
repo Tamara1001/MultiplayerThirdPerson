@@ -112,13 +112,20 @@ namespace Blocks.Gameplay.Shooter
             return damage;
         }
 
-        // ---
         private void RegisterKillForAttacker(ulong attackerId)
         {
-            if (NetworkManager.Singleton.ConnectedClients.TryGetValue(attackerId, out var client) && client.PlayerObject != null)
+            if (NetworkManager.Singleton != null && NetworkManager.Singleton.SpawnManager != null)
             {
-                var attackerState = client.PlayerObject.GetComponent<CorePlayerState>();
-                attackerState?.AddKill();
+                var attackerObj = NetworkManager.Singleton.SpawnManager.GetPlayerNetworkObject(attackerId);
+                if (attackerObj != null && attackerObj.TryGetComponent<CorePlayerState>(out var attackerState))
+                {
+                    attackerState.AddKill();
+                    Debug.Log($"[ShooterHitProcessor] Successfully found attacker (ID: {attackerId}) and added kill.");
+                }
+                else
+                {
+                    Debug.LogWarning($"[ShooterHitProcessor] Attacker (ID: {attackerId}) not found in SpawnManager. Kill not registered.");
+                }
             }
         }
 
