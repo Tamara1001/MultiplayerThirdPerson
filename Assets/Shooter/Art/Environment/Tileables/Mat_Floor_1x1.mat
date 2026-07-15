@@ -108,7 +108,7 @@ Material:
     - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
-    - _Brightness_B_Stamp: 2
+    - _Brightness_B_Stamp: 1
     - _Brightness_G_TeamStripe: 1
     - _Brightness_R_Base: 1
     - _BumpScale: 1
@@ -129,8 +129,8 @@ Material:
     - _GlossyReflections: 0
     - _Metallic: 0
     - _Metallic_Max: 1
-    - _Metallic_Min: 0.05
-    - _Normal_Intensity: 3
+    - _Metallic_Min: 0
+    - _Normal_Intensity: 1
     - _OcclusionStrength: 1
     - _Occlusion_Multiplier: 1
     - _Parallax: 0.005
@@ -140,7 +140,7 @@ Material:
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _Smoothness_Max: 0.392
-    - _Smoothness_Min: 0.26
+    - _Smoothness_Min: 0
     - _Smoothness_Multiplier: 1
     - _SpecularHighlights: 1
     - _SrcBlend: 1
