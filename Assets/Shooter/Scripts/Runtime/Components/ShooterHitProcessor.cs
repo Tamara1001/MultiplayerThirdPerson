@@ -69,7 +69,10 @@ namespace Blocks.Gameplay.Shooter
 
             coreStats.ModifyStat(StatKeys.Health, -finalDamage, info.attackerId, ModificationSource.Damage);
 
-            bool wasKillingBlow = healthBefore > 0f && coreStats.GetCurrentValue(StatKeys.Health) <= 0f;
+            float healthAfter = coreStats.GetCurrentValue(StatKeys.Health);
+            Debug.Log($"[ShooterHitProcessor] HandleHit processed on Client {NetworkManager.Singleton.LocalClientId}. Health before: {healthBefore}, Health after: {healthAfter}");
+
+            bool wasKillingBlow = healthBefore > 0f && healthAfter <= 0f;
             if (wasKillingBlow)
             {
                 RegisterKillForAttacker(info.attackerId);
@@ -114,13 +117,16 @@ namespace Blocks.Gameplay.Shooter
 
         private void RegisterKillForAttacker(ulong attackerId)
         {
+            Debug.Log($"[ShooterHitProcessor] RegisterKillForAttacker called for attackerId: {attackerId}");
+            
             if (NetworkManager.Singleton != null && NetworkManager.Singleton.SpawnManager != null)
             {
                 var attackerObj = NetworkManager.Singleton.SpawnManager.GetPlayerNetworkObject(attackerId);
                 if (attackerObj != null && attackerObj.TryGetComponent<CorePlayerState>(out var attackerState))
                 {
+                    Debug.Log($"[ShooterHitProcessor] Found attacker {attackerId}, adding kill...");
                     attackerState.AddKill();
-                    Debug.Log($"[ShooterHitProcessor] Successfully found attacker (ID: {attackerId}) and added kill.");
+                    Debug.Log($"[ShooterHitProcessor] Successfully invoked AddKill for attacker {attackerId}.");
                 }
                 else
                 {
