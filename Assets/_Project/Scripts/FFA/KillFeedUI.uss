@@ -1,38 +1,232 @@
 /*
     KillFeedUI.uss
-    ════════════════════════════════════════════════════════════════════════════
-    Stylesheet for the FFA Kill Feed HUD panel.
-
-    Follows the template's design language (dark semi-transparent backgrounds,
-    white/light-grey text, subtle rounded corners, opacity transitions) as
-    established in CoreHUD.uss and WeaponHUD.uss.
-
-    Class inventory
-    ───────────────
-      .kill-feed-container      → outer container, left-side anchored
-      .kill-feed-entry          → a single kill row (horizontal flex)
-      .kill-feed-entry--self    → modifier for self-elimination rows (muted style)
-      .kill-feed-entry--fade-out → triggers the CSS opacity transition to 0
-      .kill-feed-killer         → killer name label
-      .kill-feed-killer--local  → modifier: local player is the killer (gold tint)
-      .kill-feed-separator      → the ✕ / ☠ icon between names
-      .kill-feed-victim         → victim name label
-      .kill-feed-victim--local  → modifier: local player is the victim (red tint)
+    Unified Stylesheet for FFA HUD (CoreHUD + WeaponHUD + KillFeed)
 */
 
-/* ── Container ─────────────────────────────────────────────────────────────── */
+#hud-root {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
 
+/* ── Match Info (Top-Center) ───────────────────────────────────────────────── */
+#match-info-container {
+    position: absolute;
+    top: 10px;
+    width: 100%;
+    align-items: center;
+    pointer-events: none;
+}
+
+#match-timer-label {
+    font-size: 32px;
+    -unity-font-style: bold;
+    color: white;
+    -unity-text-outline-width: 1px;
+    -unity-text-outline-color: black;
+}
+
+/* ── Notification Container (Top-Right) ────────────────────────────────────── */
+.notification-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    flex-direction: column;
+    min-width: 200px;
+    max-width: 350px;
+    max-height: 200px;
+    pointer-events: none;
+}
+
+.notification-item {
+    flex-direction: column;
+    background-color: rgba(22, 22, 24, 0.9);
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    opacity: 1;
+    transition-property: opacity;
+    transition-duration: 0.3s;
+}
+
+.notification-item Label {
+    color: rgb(229, 229, 229);
+    font-size: 11px;
+    -unity-font-style: bold;
+    white-space: normal;
+    -unity-text-align: middle-center;
+}
+
+.notification-fade-out {
+    opacity: 0;
+}
+
+/* ── Weapon and Health Containers ──────────────────────────────────────────── */
+#weapon-info-container,
+#health-info-container {
+    position: absolute;
+    bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.0);
+    padding: 15px;
+    border-radius: 5px;
+    width: 320px;
+}
+
+#health-info-container {
+    left: 20px;
+    right: auto;
+}
+
+#weapon-info-container {
+    right: 20px;
+    left: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Align children to the right */
+}
+
+/* ── Kill Count (Directly above weapon container) ──────────────────────────── */
+#kill-count-container {
+    position: absolute;
+    bottom: 120px; /* Above the weapon info container */
+    right: 35px; /* Aligned nicely with weapon container padding */
+    align-items: flex-end;
+    pointer-events: none;
+}
+
+#kill-count-label {
+    font-size: 24px;
+    -unity-font-style: bold;
+    color: white;
+    -unity-text-outline-width: 1px;
+    -unity-text-outline-color: black;
+}
+
+/* ── Progress Bars (Health, Stamina, Ammo) ─────────────────────────────────── */
+#player-health-bar,
+#player-stamina-bar {
+    width: 100%;
+    height: 30px;
+    min-height: 30px;
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    flex-shrink: 0;
+    justify-content: center;
+}
+
+#player-ammo-bar {
+    width: 85%;
+    height: 30px;
+    min-height: 30px;
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    flex-shrink: 0;
+    justify-content: center;
+}
+
+#ammo-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 5px;
+    width: 100%;
+}
+
+#ammo-label {
+    font-size: 16px;
+    color: white;
+    -unity-font-style: bold;
+    text-shadow: 1px 1px 2px rgb(0, 0, 0);
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+#weapon-type-label {
+    font-size: 24px;
+    color: white;
+    -unity-font-style: bold;
+    text-shadow: 1px 1px 2px rgb(0, 0, 0);
+    margin-bottom: 5px;
+}
+
+#weapon-icon {
+    align-self: flex-end;
+}
+
+/* ── Reticle & Overlay ─────────────────────────────────────────────────────── */
+#reticle-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+
+#player-reticle {
+    position: relative;
+    width: 256px;
+    height: 256px;
+    -unity-background-scale-mode: scale-to-fit;
+    background-size: 100% 100%;
+    transform-origin: center;
+}
+
+#message-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#message-label {
+    font-size: 28px;
+    color: white;
+    -unity-font-style: bold;
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 12px;
+}
+
+#countdown-label {
+    font-size: 150px;
+    color: rgb(255, 255, 255);
+    -unity-font-style: bold;
+    letter-spacing: -5px;
+}
+
+#message-divider {
+    width: 194px;
+    height: 4px;
+    background-color: white;
+    margin-bottom: -10px;
+    align-self: center;
+}
+
+/* ── Variables ─────────────────────────────────────────────────────────────── */
+:root {
+    --color-progressbar-background: rgba(16, 16, 16, 0.75);
+    --color-progressbar-border-color: rgba(0, 0, 0, 0);
+    --color-progressbar-fill: rgba(145, 213, 97, 0.75);
+    --color-progressbar-text: rgb(255, 255, 255);
+    --color-progressbar-text-low: rgb(255, 0, 0);
+    --color-progressbar-ammo-blue: rgba(19, 181, 231, 0.75);
+}
+
+/* ── Kill Feed Container & Entries (Left-Side) ─────────────────────────────── */
 .kill-feed-container {
     position: absolute;
     left: 20px;
-    top: 80px;          /* below the match timer if present, above the health bars */
+    top: 80px;
     min-width: 260px;
     max-width: 420px;
     flex-direction: column;
     align-items: flex-start;
+    pointer-events: none;
 }
-
-/* ── Individual Entry Row ───────────────────────────────────────────────────── */
 
 .kill-feed-entry {
     flex-direction: row;
@@ -41,28 +235,20 @@
     border-radius: 6px;
     padding: 6px 10px;
     margin-bottom: 5px;
-
-    /* Slide-in from the left */
     translate: 0 0;
-
-    /* Fade animation targets */
     opacity: 1;
     transition-property: opacity;
     transition-duration: 0.4s;
     transition-timing-function: ease-out;
 }
 
-/* Self-elimination variant: slightly muted appearance */
 .kill-feed-entry--self {
     background-color: rgba(40, 30, 10, 0.82);
 }
 
-/* Triggered by KillFeedUI.cs when the entry expires */
 .kill-feed-entry--fade-out {
     opacity: 0;
 }
-
-/* ── Killer Name ────────────────────────────────────────────────────────────── */
 
 .kill-feed-killer {
     color: rgb(220, 220, 220);
@@ -75,13 +261,10 @@
     max-width: 160px;
 }
 
-/* Highlight when the LOCAL player scored the kill */
 .kill-feed-killer--local {
     color: rgb(255, 210, 50);    /* gold */
     -unity-font-style: bold;
 }
-
-/* ── Separator Icon ─────────────────────────────────────────────────────────── */
 
 .kill-feed-separator {
     color: rgb(180, 60, 60);
@@ -90,8 +273,6 @@
     margin-right: 6px;
     flex-shrink: 0;
 }
-
-/* ── Victim Name ────────────────────────────────────────────────────────────── */
 
 .kill-feed-victim {
     color: rgb(160, 160, 160);
@@ -104,8 +285,17 @@
     max-width: 160px;
 }
 
-/* Highlight when the LOCAL player was eliminated */
 .kill-feed-victim--local {
     color: rgb(220, 80, 80);     /* red */
     -unity-font-style: bold;
+}
+
+/* Low ammo warning style */
+.low-ammo {
+    color: rgb(255, 100, 0);
+}
+
+/* No ammo style */
+.no-ammo {
+    color: rgb(255, 0, 0);
 }
